@@ -16,7 +16,10 @@
     
     var self = this;
     var tick = function() {
+      
+      self.update();
       self.draw(screen, gameSize);
+
       requestAnimationFrame(tick);
     }
     tick();
@@ -31,8 +34,17 @@
         // draw每个物体
         drawRect(screen, this.bodies[i])
       }
+    },
+    update: function() {
+      var self = this;
+      console.log('game update')
+      console.log(this.bodies.length)
+      // 循环各个主体的update方法
+      for(var i = 0;i<this.bodies.length;i++) {
+        this.bodies[i].update()
+      }
     }
-  }
+  };
 
   var Player = function(game, gameSize) {
     this.game = game;
@@ -43,10 +55,20 @@
       x: gameSize.x/2,
       y: gameSize.y - this.size.y*2
     };
-    // this.keyboarder = new Keyboarder()
+    // 键盘对象
+    this.keyboarder = new Keyboarder()
   };
 
   Player.prototype = {
+    update: function() {
+      // todo: 修复超出边界不能移动；
+      console.log('player update')
+      if(this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)){
+        this.center.x -= 2;
+      } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)){
+        this.center.x +=2;
+      }
+    }
 
   };
 
@@ -59,6 +81,32 @@
       body.size.x,
       body.size.y
     );
+  };
+
+
+  // 监听键盘
+
+  var Keyboarder = function() {
+    var keyState = {};
+
+    // 需要兼容ie写法
+    // 鼠标监听
+    // 移动端监听拖动
+    window.addEventListener('keydown', function(e) {
+      keyState[e.keyCode] = true;
+    });
+
+    window.addEventListener('keyup', function(e) {
+      keyState[e.keyCode] = false;
+    });
+
+    this.isDown = function(keyCode){
+      return keyState[keyCode] === true;
+    };
+
+    this.KEYS = {LEFT: 37,RIGHT: 39,S: 83};
+
+
   }
 
 

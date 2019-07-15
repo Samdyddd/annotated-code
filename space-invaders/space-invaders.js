@@ -55,7 +55,7 @@
     // **update()** runs the main game logic.
     update: function() {
       var self = this;
-
+      console.log('game update')
       // `notCollidingWithAnything` returns true if passed body
       // is not colliding with anything.
       var notCollidingWithAnything = function(b1) {
