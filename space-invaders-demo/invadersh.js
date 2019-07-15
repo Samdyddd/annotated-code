@@ -112,9 +112,21 @@
     };
 
     this.KEYS = {LEFT: 37,RIGHT: 39,S: 83};
+  };
 
+  // 子弹
+  var Bullet = function(center, velocity){
+    this.center = center;
+    this.size = {x: 3, y: 3};
+    this.velocity = velocity;
+  };
 
-  }
+  Bullet.prototype = {
+    update: function() {
+      this.center.x += this.velocity.x;
+      this.center.y += this.velocity.y;
+    }
+  };
 
 
   // 监听加载，立即运行
