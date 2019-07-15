@@ -37,8 +37,8 @@
     },
     update: function() {
       var self = this;
-      console.log('game update')
-      console.log(this.bodies.length)
+      // console.log('game update')
+      // console.log(this.bodies.length)
       // 循环各个主体的update方法
       for(var i = 0;i<this.bodies.length;i++) {
         this.bodies[i].update()
@@ -62,11 +62,18 @@
   Player.prototype = {
     update: function() {
       // todo: 修复超出边界不能移动；
-      console.log('player update')
+      // console.log('player update')
       if(this.keyboarder.isDown(this.keyboarder.KEYS.LEFT)){
-        this.center.x -= 2;
+        
+        if(this.center.x > 10) {
+          this.center.x -= 2;
+        }
+        console.log(this.center.x, 'left')
       } else if (this.keyboarder.isDown(this.keyboarder.KEYS.RIGHT)){
-        this.center.x +=2;
+        if(this.center.x< 490) {
+          this.center.x +=2;
+        }
+        console.log(this.center.x, 'right')
       }
     }
 
