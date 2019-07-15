@@ -223,6 +223,7 @@
   // ------
 
   // **new Bullet()** creates a new bullet.
+  // 子弹类
   var Bullet = function(center, velocity) {
     this.center = center;
     this.size = { x: 3, y: 3 };
@@ -244,6 +245,7 @@
   // -----------------------
 
   // **new Keyboarder()** creates a new keyboard input tracking object.
+  // 键盘输入
   var Keyboarder = function() {
 
     // Records up/down state of each key that has ever been pressed.
@@ -273,6 +275,7 @@
   // ---------------
 
   // **drawRect()** draws passed body as a rectangle to `screen`, the drawing context.
+  // 绘制
   var drawRect = function(screen, body) {
     screen.fillRect(body.center.x - body.size.x / 2, body.center.y - body.size.y / 2,
                     body.size.x, body.size.y);
@@ -287,6 +290,8 @@
   // 3. Bottom of `b1` is above the top of `b2`.
   // 4. Left of `b1` is to the right of the right of `b2`.
   // 5. Top of `b1` is below the bottom of `b2`.
+  // 如果两个传递的物体发生碰撞，则返回true;
+  // 以下针对五中情况测试；
   var colliding = function(b1, b2) {
     return !(
       b1 === b2 ||
@@ -301,7 +306,9 @@
   // ----------
 
   // When the DOM is ready, create (and start) the game.
+  // 加载完毕，立即启动游戏
   window.addEventListener('load', function() {
     new Game();
   });
+
 })();
